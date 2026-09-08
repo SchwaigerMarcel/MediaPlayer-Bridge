@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace MediaPlayerBridge;
@@ -22,12 +23,6 @@ internal static class RainmeterInstaller
                 "piXel visualizer was not found under Documents\\Rainmeter\\Skins. Install the RMSKIN first.");
         }
 
-        var adapterSource = Path.Combine(AppContext.BaseDirectory, "Rainmeter", "mPlayer.MediaPlayerBridge.inc");
-        if (!File.Exists(adapterSource))
-        {
-            throw new FileNotFoundException("The packaged Rainmeter adapter is missing.", adapterSource);
-        }
-
         var measuresDirectory = Path.Combine(skinRoot, "@Resources", "Measures");
         var playerMeasures = Path.Combine(measuresDirectory, "mPlayer.inc");
         var backup = Path.Combine(measuresDirectory, "mPlayer.NowPlaying.backup.inc");
@@ -38,7 +33,7 @@ internal static class RainmeterInstaller
             File.Copy(playerMeasures, backup, true);
         }
 
-        File.Copy(adapterSource, playerMeasures, true);
+        WriteEmbeddedAdapter(playerMeasures);
 
         var executable = Environment.ProcessPath
             ?? throw new InvalidOperationException("The executable path could not be determined.");
@@ -71,6 +66,15 @@ internal static class RainmeterInstaller
         {
             RestoreControls(Path.Combine(skinRoot, fileName));
         }
+    }
+
+    private static void WriteEmbeddedAdapter(string targetPath)
+    {
+        const string resourceName = "MediaPlayerBridge.Rainmeter.mPlayer.MediaPlayerBridge.inc";
+        using var stream = typeof(RainmeterInstaller).Assembly.GetManifestResourceStream(resourceName)
+            ?? throw new InvalidOperationException("The embedded Rainmeter adapter is missing.");
+        using var reader = new StreamReader(stream, Encoding.UTF8);
+        File.WriteAllText(targetPath, reader.ReadToEnd(), Encoding.UTF8);
     }
 
     private static string GetSkinRoot() => Path.Combine(
