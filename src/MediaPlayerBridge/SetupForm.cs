@@ -37,7 +37,7 @@ internal sealed class SetupForm : Form
         Controls.AddRange([heading, description, setupAll, repairPixel, enableStartup, disableStartup, uninstall]);
     }
 
-    private Button CreateButton(string text, int x, int y, EventHandler onClick) => new()
+    private Button CreateButton(string text, int x, int y, EventHandler onClick) => new Button()
     {
         Text = text,
         Location = new Point(x, y),
