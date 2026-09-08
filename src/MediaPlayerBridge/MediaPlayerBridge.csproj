@@ -8,8 +8,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.NET" Version="10.0.18362.6-preview" />
-    <Content Include="Rainmeter\**\*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
-    <Content Include="Setup\Install MediaPlayerBridge.cmd" TargetPath="Install MediaPlayerBridge.cmd" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <EmbeddedResource Include="Rainmeter\mPlayer.MediaPlayerBridge.inc" />
   </ItemGroup>
 
   <Target Name="RemoveLegacyCsWinRtRuntimeFromPublish"
