@@ -24,10 +24,10 @@ The visualizer bars remain Rainmeter's normal system-audio visualizer, therefore
 
 ### Setup
 
-1. Download the current `MediaPlayerBridge-win-x64.zip` from **Actions → Build Windows release → Artifacts**. A tagged version can also appear under **Releases**.
-2. Right-click the ZIP → **Properties** → select **Unblock**, then extract it to a permanent folder, for example `C:\Apps\MediaPlayerBridge`.
-3. Double-click **Install MediaPlayerBridge.cmd**.
-4. Select **1 – Alles einrichten**.
+1. Download `MediaPlayerBridge.exe` from the current GitHub Release.
+2. Right-click the EXE → **Properties** → select **Unblock**, then move it to a permanent folder, for example `C:\Apps\MediaPlayerBridge`.
+3. Double-click **MediaPlayerBridge.exe**.
+4. Click **Set up everything**.
 5. Refresh the piXel skin in Rainmeter once.
 
 The setup runs without administrator rights. It creates only a per-user Windows Startup entry and a backup of piXel's original NowPlaying configuration.
@@ -38,29 +38,28 @@ After setup, the bridge starts with Windows. Open Spotify, Spotify Web, YouTube 
 
 For a browser player, Windows must show normal media controls for that browser tab. If Windows itself has no media session, the bridge cannot retrieve its title or cover art.
 
-## Setup menu
+## Setup window
 
-Double-click **Install MediaPlayerBridge.cmd** at any time.
+Double-click **MediaPlayerBridge.exe** at any time.
 
-| Option | Result |
+| Button | Result |
 | --- | --- |
-| 1 | Install or repair piXel support, enable autostart and start the bridge |
-| 2 | Install or repair only piXel support |
-| 3 | Enable autostart |
-| 4 | Start the bridge now |
-| 5 | Disable autostart |
-| 6 | Uninstall piXel support, autostart and local bridge data |
+| Set up everything | Installs or repairs piXel support, enables startup, and starts the bridge |
+| Install or repair piXel support | Repairs only piXel support |
+| Enable startup | Starts the bridge automatically after you sign in |
+| Disable startup | Prevents automatic startup |
+| Uninstall | Restores piXel, removes startup and local bridge data |
 
 ## Disable autostart
 
-Run **Install MediaPlayerBridge.cmd** and select **5**. The currently running bridge keeps running until you close it or sign out; it will not start after the next login.
+Double-click the EXE and click **Disable startup**. The currently running bridge keeps running until you close it or sign out.
 
 ## Uninstall
 
-1. Double-click **Install MediaPlayerBridge.cmd**.
-2. Select **6 – Deinstallieren**.
+1. Double-click **MediaPlayerBridge.exe**.
+2. Click **Uninstall** and confirm.
 3. Refresh piXel in Rainmeter.
-4. Delete the extracted `MediaPlayerBridge` program folder.
+4. Delete the EXE.
 
 Uninstall restores piXel's original NowPlaying measures, restores its original playback actions, removes the user Startup entry and deletes the bridge's local cover-art cache.
 
@@ -70,4 +69,4 @@ This is a personal, open-source tool. Windows may show a SmartScreen warning for
 
 ## Development and builds
 
-GitHub Actions creates a self-contained Windows ZIP on every push to `main`. Push a tag such as `v1.0.0` to create a GitHub Release automatically.
+GitHub Actions creates one self-contained Windows EXE on every push to `main`. Push a tag such as `v1.0.0` to create a GitHub Release automatically.
