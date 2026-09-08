@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.18362.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.NET" Version="10.0.18362.6-preview" />
+    <Content Include="Rainmeter\**\*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Setup\Install MediaPlayerBridge.cmd" TargetPath="Install MediaPlayerBridge.cmd" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <Target Name="RemoveLegacyCsWinRtRuntimeFromPublish"
+          BeforeTargets="_HandleFileConflictsForPublish">
+    <ItemGroup>
+      <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)"
+        Condition="'%(ResolvedFileToPublish.RelativePath)' == 'WinRT.Runtime.dll'
+          And $([System.String]::Copy('%(ResolvedFileToPublish.Identity)').ToLowerInvariant().Contains('microsoft.windows.cswinrt'))" />
+    </ItemGroup>
+  </Target>
+</Project>
